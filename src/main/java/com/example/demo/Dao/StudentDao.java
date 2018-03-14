@@ -29,7 +29,6 @@ public class StudentDao {
 		  sessionFactory.getCurrentSession().saveOrUpdate(student);
 		  
 	  }
-	 
 	@SuppressWarnings("unchecked")
 	public List<Student> getStudentList()
 	 {

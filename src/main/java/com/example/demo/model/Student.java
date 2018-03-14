@@ -16,8 +16,19 @@ public class Student {
 	String course;
 	String date;
 	String files;
-	public Student() {
-		// TODO Auto-generated constructor stub
+	public Student() 
+	{
+	}
+	public Student(int id, String firstname, String lastname, String mobile, String course, String date, String files) 
+	{
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.mobile = mobile;
+		this.course = course;
+		this.date = date;
+		this.files = files;
 	}
 	public int getId() {
 		return id;
@@ -61,21 +72,9 @@ public class Student {
 	public void setFiles(String files) {
 		this.files = files;
 	}
-	public Student(int id, String firstname, String lastname, String mobile, String course, String date, String files) {
-		super();
-		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.mobile = mobile;
-		this.course = course;
-		this.date = date;
-		this.files = files;
-	}
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", mobile=" + mobile
 				+ ", course=" + course + ", date=" + date + ", files=" + files + "]";
-	}	
-	
-	
+	}		
 }

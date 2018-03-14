@@ -1,0 +1,10 @@
+1.$ git init
+2.$ git add .
+3.$ git commit -m "First commit"
+4.$ git config user.email "yamunabondalapati93@gmail.com"
+5. $ git config user.name "BYamuna"
+6.$ git remote add origin https://github.com/BYamuna/javapractice.git
+7. $ git remote -v
+8.$ git push origin master
+
+$ git add src/*

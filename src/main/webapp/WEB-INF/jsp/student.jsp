@@ -34,7 +34,7 @@ window.setTimeout(function() {
 <div class="container">
 <h1>Student Master</h1>
 	<form:form modelAttribute="student" class="form-horizontal"
-		action="studenttest" method="POST">
+		action="studenttest" enctype="multipart/form-data" method="POST">
 		<form:hidden path="id" />
 		<div class="form-group">
 			<label class="col-md-3 control-label no-padding-right">FirstName:</label>
@@ -62,7 +62,7 @@ window.setTimeout(function() {
        </div>
        <div class="form-group">
        <label class="col-md-3 control-label no-padding-right">Select file:</label>
-       <input type="file" name="file" id="file" multiple>
+       <input type="file" name="file1" id="file1" multiple />
        </div> 
 		<div class="form-group">
 			<input type="submit" id="create" class="btn btn-primary" value="Submit"/> 
@@ -71,7 +71,7 @@ window.setTimeout(function() {
 	</form:form>
 	</div>
 	<div class="container">
-	<div class="cleafix">
+	<div class="cleafix"></div>
 		<div class="col-md-12">
 			<h1>Student Details</h1>
 			<div class="table-responsive-lg">
@@ -84,9 +84,9 @@ window.setTimeout(function() {
 						<th>course</th>
 						<th>mobile</th>
 						<th>Date</th>
-						<th>fileupload</th>
-						<th>options</th>
-						<th>filedownload</th>
+						<th>file upload</th>
+						<th>file download</th>
+ 						<th>options</th>
 					</tr>
 					<c:forEach var="list" items="${slist}">
 						<tr class="active">
@@ -96,24 +96,22 @@ window.setTimeout(function() {
 							<td>${list.course}</td>
 							<td>${list.mobile}</td>
 							<td>${list.date}</td>
-						
+							<td>${list.files}</td>	
 							<td><c:if test="${not empty list.files}">
 			    <c:forTokens items="${list.files}" delims="*" var="mySplit">
-			<a class="attachments" target="_blank" href="reportDocuments/${mySplit}"><i class="fa fa-paperclip fa-lg grey" title="${mySplit}"></i></a>
+			<a class="attachments" target="_blank" href="reportDocuments/${mySplit}">
+			<i class="fa fa-download fa-lg grey" title="${mySplit}"></i></a>
 		    </c:forTokens>
-		   </c:if> </td>
+		   </c:if></td>
 		   	<td>
 		   <a href="deletestudent?id=${list.id}"> <i class="fa fa-trash"></i></a> 
 			<a href="editstudent?id=${list.id}"> <i class="fa fa-edit"></i></a>
 			</td>
-						</tr>
+			</tr>
 					</c:forEach>
 					</table>
 					</div>
 					</div>
-					</div>
-					</div>
-					
-
+					</div>					
 </body>
 </html>

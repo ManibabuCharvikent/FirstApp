@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.demo.Config.FilesStuff;
 import com.example.demo.Dao.StudentDao;
 import com.example.demo.model.Student;
 
@@ -21,6 +24,8 @@ public class StudentController {
 	
 	@Autowired
 	StudentDao studentDao;
+	@Autowired
+	FilesStuff fileTemplate;
 	
 	
 @RequestMapping("/studenttest")	
@@ -36,7 +41,7 @@ public class StudentController {
 		return "student";
 	}
 @RequestMapping(value = "/studenttest", method = RequestMethod.POST)
-public String saveStudent(@Valid @ModelAttribute  Student student,Model model,RedirectAttributes redir) throws IOException {
+public String saveStudent(@Valid @ModelAttribute  Student student,Model model,@RequestParam("file1") MultipartFile[] uploadedFiles,RedirectAttributes redir) throws IOException {
 	//System.out.println("entering into post....");
 	
 	// Boolean result =studentDao.checkRecordExistsOrNot(student);
@@ -53,6 +58,23 @@ public String saveStudent(@Valid @ModelAttribute  Student student,Model model,Re
     	 id = sbean	.getId();
     	 if(id == did && sbean != null)
 			{
+    		 int filecount =0;
+        	 
+        	 for(MultipartFile multipartFile : uploadedFiles) {
+    				String fileName = multipartFile.getOriginalFilename();
+    				if(!multipartFile.isEmpty())
+    				{
+    					filecount++;
+    				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+    				}
+    			}
+        	 
+        	 if(filecount>0)
+        	 {
+        		 student.setFiles(fileTemplate.concurrentFileNames());
+        		 fileTemplate.clearFiles();
+        		 
+        	 }
     		 studentDao.SaveOrUpdate(student);
     		 redir.addFlashAttribute("msg", "Record updated successfully");
     			redir.addFlashAttribute("cssMsg", "info");
@@ -67,8 +89,29 @@ public String saveStudent(@Valid @ModelAttribute  Student student,Model model,Re
      
      if(student.getId() == 0 && sbean== null)
 		{
+    	 
+    	 int filecount =0;
+    	 
+    	 for(MultipartFile multipartFile : uploadedFiles) {
+				String fileName = multipartFile.getOriginalFilename();
+				if(!multipartFile.isEmpty())
+				{
+					filecount++;
+				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+				}
+			}
+    	 
+    	 if(filecount>0)
+    	 {
+    		 student.setFiles(fileTemplate.concurrentFileNames());
+    		 fileTemplate.clearFiles();
+    		 
+    	 }
+
 			
     	 studentDao.SaveOrUpdate(student);
+
+
 			redir.addFlashAttribute("msg", "Record Inserted Successfully");
 			redir.addFlashAttribute("cssMsg", "success");
 		}
