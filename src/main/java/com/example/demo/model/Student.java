@@ -16,10 +16,12 @@ public class Student {
 	String course;
 	String date;
 	String files;
+	String country;
 	public Student() 
 	{
 	}
-	public Student(int id, String firstname, String lastname, String mobile, String course, String date, String files) 
+	public Student(int id, String firstname, String lastname, String mobile, String course, String date, String files,
+			String country) 
 	{
 		super();
 		this.id = id;
@@ -29,7 +31,9 @@ public class Student {
 		this.course = course;
 		this.date = date;
 		this.files = files;
+		this.country = country;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -72,9 +76,16 @@ public class Student {
 	public void setFiles(String files) {
 		this.files = files;
 	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Student [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", mobile=" + mobile
-				+ ", course=" + course + ", date=" + date + ", files=" + files + "]";
-	}		
+				+ ", course=" + course + ", date=" + date + ", files=" + files + ", country=" + country + "]";
+	}	
 }

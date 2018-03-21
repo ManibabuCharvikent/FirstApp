@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,10 +65,17 @@ window.setTimeout(function() {
        <label class="col-md-3 control-label no-padding-right">Select file:</label>
        <input type="file" name="file1" id="file1" multiple />
        </div> 
+       <div class="form-group">
+		<label class="col-md-3 control-label no-padding-right">Country:</label>
+		<form:select path="country">
+		     <form:option value="none" label="select" />
+		     <form:options items="${countryList}"/>
+		 </form:select>
+		</div>  
 		<div class="form-group">
 			<input type="submit" id="create" class="btn btn-primary" value="Submit"/> 
 			<input type="reset" id="reset" class="btn btn-default"  value="Cancel"/>
-		</div>   
+		</div> 
 	</form:form>
 	</div>
 	<div class="container">
@@ -86,6 +94,7 @@ window.setTimeout(function() {
 						<th>Date</th>
 						<th>file upload</th>
 						<th>file download</th>
+						<th>country</th>
  						<th>options</th>
 					</tr>
 					<c:forEach var="list" items="${slist}">
@@ -96,11 +105,12 @@ window.setTimeout(function() {
 							<td>${list.course}</td>
 							<td>${list.mobile}</td>
 							<td>${list.date}</td>
-							<td>${list.files}</td>	
+							<td>${list.files}</td>
+							 <td>${list.country}</td>		
 							<td><c:if test="${not empty list.files}">
 			    <c:forTokens items="${list.files}" delims="*" var="mySplit">
 			<a class="attachments" target="_blank" href="reportDocuments/${mySplit}">
-			<i class="fa fa-download fa-lg grey" title="${mySplit}"></i></a>
+			<i class="fa fa-download fa-md grey" title="${mySplit}"></i></a>
 		    </c:forTokens>
 		   </c:if></td>
 		   	<td>
