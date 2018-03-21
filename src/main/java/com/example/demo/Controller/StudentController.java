@@ -134,9 +134,10 @@ public void showStudentsList(Model model)
 {
     List<Student> slist=studentDao.getStudentList(); 
 }
+
+// comment added
 @RequestMapping(value = "/deletestudent")
-public String  deleteStudent(@RequestParam(value="id", required=true) String id,Model model,RedirectAttributes redir)
-	{
+public String  deleteStudent(@RequestParam(value="id", required=true) String id,Model model,RedirectAttributes redir) {
 		studentDao.deleteStudentRecordByid(id);
 		redir.addFlashAttribute("msg", "Record deleted");
 		redir.addFlashAttribute("cssMsg", "danger");
