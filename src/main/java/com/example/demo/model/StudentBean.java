@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+//StudentBean Class
 public class StudentBean {
 	
 	@Id
