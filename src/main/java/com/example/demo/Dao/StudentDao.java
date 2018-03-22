@@ -48,9 +48,8 @@ public class StudentDao {
 	 }
 	public void deleteStudentRecordByid(String id) 
 	{
-		String hql="delete from Student where id=:i";
+		String hql="delete from Student where id="+id;
 		Query qu =sessionFactory.getCurrentSession().createQuery(hql);
-	    qu.setParameter("i",Integer.parseInt(id));
 	       
 	      int status= qu.executeUpdate();
 	        if(status ==1)
