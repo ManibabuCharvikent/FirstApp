@@ -13,74 +13,92 @@ import com.example.demo.model.StudentBean;
 
 @Repository
 @Transactional
-public class StudentBeanDao {
+public class StudentBeanDao
+{
 	
 	@Autowired
 	SessionFactory sessionFactory;
 	
 	
 	
-	public void save(StudentBean studentBean)
-	  {
+		  public void save(StudentBean studentBean)
+	     {
 		  sessionFactory.getCurrentSession().saveOrUpdate(studentBean);
 		  
-	  }
+	      }
+	
 
-	public List<StudentBean> showStudentBeanDetails()
-	{
-		String hql="from StudentBean";
-		List<StudentBean> list=sessionFactory.getCurrentSession().createQuery(hql).list();
+	      public List<StudentBean> showStudentBeanDetails()
+	     {
+	       String hql="from StudentBean";
+		   List<StudentBean> list=sessionFactory.getCurrentSession().createQuery(hql).list();
 		
-	return list;
+	        return list;
 		
-}
+          }
 
-	public StudentBean checkStudentExistOrNot(StudentBean objStudent) {
+	       public StudentBean checkStudentExistOrNot(StudentBean objStudent)
+	       {
 		
-		String hql ="from StudentBean where stdPhone='"+objStudent.getStdPhone()+"'";
-		
-		  Query q =  sessionFactory.getCurrentSession().createQuery(hql);
+		   String hql ="from StudentBean where stdPhone='"+objStudent.getStdPhone()+"'";
+		   Query q =  sessionFactory.getCurrentSession().createQuery(hql);
 		  
-		  List<StudentBean> studentData= q.list();
+		   List<StudentBean> studentData= q.list();
 		  
 	       if(studentData.size()>0)
-	       {
+	          {
 	             return  studentData.get(0);
 	
-	       }
-	       else { 
+	           }
+	       else 
+	           { 
 	              return null;
 	           }
 		
-	}
-	public void  deleteStudentRecordById(int stdId)
-	{
+	        }
+	       
+	        public void  deleteStudentRecordById(int stdId)
+	        {
 
-	String hql="delete from StudentBean where  stdId="+stdId;
-	Query query=sessionFactory.getCurrentSession().createQuery(hql);
+	         String hql="delete from StudentBean where  stdId="+stdId;
+	         Query query=sessionFactory.getCurrentSession().createQuery(hql);
 	
-		query.executeUpdate();
-		/*if(Status==1)
-		{
-			System.out.println("record is deleted");
-		}
-		else
-		{
-			System.out.println("record  was not deleted");
-		}
-		return Status;
-	}*/
-	}
-	public StudentBean editStudentRecordById(String stdId)
-	{
-		String hql="from StudentBean where stdId="+stdId;
-		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		List<StudentBean> list=query.list();
-		if(list.size()>0)
-		{	
-			return list.get(0);
-		}
-		return null;
+		     query.executeUpdate();
 		
-	}
-}
+	         }
+	        
+	        public StudentBean editStudentRecordById(int stdId)
+	        {
+	        	
+		     String hql="from StudentBean where stdId="+stdId;
+		     Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		
+		     List<StudentBean> list=query.list();
+		       if(list.size()>0)
+		       {
+		    	   
+		        return list.get(0);
+		        }
+		     
+		       return null;
+	        }
+
+	         public Object getStudentRecordById(String stdId) 
+	         {
+		
+		      
+		      String hql="from StudentBean where stdId="+stdId;
+		      Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		
+		      List<StudentBean> list=query.list();
+		      if(list.size()>0)
+		      {
+		        return list.get(0);
+		      }
+			return list;
+	         }
+		
+		
+	          }
+	
+

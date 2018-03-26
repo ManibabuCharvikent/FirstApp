@@ -77,7 +77,7 @@ public String saveStudent(@Valid @ModelAttribute  Student student,Model model,@R
         	 }
     		 studentDao.SaveOrUpdate(student);
     		 redir.addFlashAttribute("msg", "Record updated successfully");
-    			redir.addFlashAttribute("cssMsg", "info");
+    		redir.addFlashAttribute("cssMsg", "info");
 			}
     	 else
 			{
