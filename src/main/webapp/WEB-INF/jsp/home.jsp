@@ -7,15 +7,32 @@
 <html>
 <head>
 <title>Registration Page</title>
+<script>
+window.setTimeout(function() {
+    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 5000);
+</script>
 </head>
 <body>
+<div class="container">
+<c:if test="${not empty msg}">
+		<div class="msgcss row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+				</div>
+			</div>
+		</div>
+	</c:if></div>
 <div align="center" style="color: green">
 <div>
 <h2>Student Details</h2>
 <form:form  modelAttribute="sbean" action="first" method="POST">
 <table>
     <tr>
-        <td><form:hidden path="stdId" placeholder="stdId"/></td>
+        <td><form:hidden path="stdId" /></td>
     </tr> 
     <tr>
         <td>FirstName</td>
@@ -36,8 +53,8 @@
         <td>Gender</td>
         <td>:</td>
         <td>
-            <form:radiobutton path="stdGender" value="M" label="Male"/>
-            <form:radiobutton path="StdGender" value="F" label="Female"/>
+            <form:radiobutton path="stdGender" value="M"/>Male 
+            <form:radiobutton path="stdGender" value="F"/>Female 
    
         </td>
         </tr>
