@@ -1,0 +1,20 @@
+driver.switchTo().defaultContent();
+driver.switchTo().frame("left");
+driver.findElement(By.className("task")).click();
+
+
+driver.switchTo().alert().accept();
+driver.findElements(By.
+
+driver.switchTo().defaultContent();
+driver.switchTo().frame("Right");
+new Select(driver.findElement(By.id("masteradmin"))).selectByVisibleText("Sign Out");
+
+
+@SuppressWarnings("unused")
+ArrayList<String> wh=new ArrayList<>(driver.getWindowHandles());
+driver.switchTo().window(wh.get(1));
+
+driver.findElement(By.name("username")).sendKeys("user11");
+driver.findElement(By.name("password")).sendKeys("123456");
+driver.findElement(By.name("signin")).click();

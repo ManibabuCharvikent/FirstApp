@@ -18,50 +18,47 @@ private String stdName;
 private String stdAddr;
 private String stdPhone;
 private String stdGender;
-
+private String stdDate;
 public int getStdId() {
 	return stdId;
 }
-
 public void setStdId(int stdId) {
 	this.stdId = stdId;
 }
-
 public String getStdName() {
 	return stdName;
 }
-
 public void setStdName(String stdName) {
 	this.stdName = stdName;
 }
-
 public String getStdAddr() {
 	return stdAddr;
 }
-
 public void setStdAddr(String stdAddr) {
 	this.stdAddr = stdAddr;
 }
-
 public String getStdPhone() {
 	return stdPhone;
 }
-
 public void setStdPhone(String stdPhone) {
 	this.stdPhone = stdPhone;
 }
-
 public String getStdGender() {
 	return stdGender;
 }
-
 public void setStdGender(String stdGender) {
 	this.stdGender = stdGender;
 }
-
+public String getStdDate() {
+	return stdDate;
+}
+public void setStdDate(String stdDate) {
+	this.stdDate = stdDate;
+}
 @Override
 public String toString() {
 	return "StudentBean [stdId=" + stdId + ", stdName=" + stdName + ", stdAddr=" + stdAddr + ", stdPhone=" + stdPhone
-			+ ", stdGender=" + stdGender + "]";
+			+ ", stdGender=" + stdGender + ", stdDate=" + stdDate + "]";
+
 }
 }
