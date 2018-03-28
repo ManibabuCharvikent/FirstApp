@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <html>
 <head>
 <title>Registration Page</title>
@@ -30,36 +30,58 @@
 	<div align="center" style="color: green">
 		<div>
 			<h2>Student Details</h2>
-			<form:form modelAttribute="sbean" action="first" method="POST">
+			<form:form modelAttribute="sbean" action="first" enctype="multipart/form-data" method="POST">
 				<table>
 					<tr>
 						<td><form:hidden path="stdId" /></td>
 					</tr>
-					<tr>
-						<td>FirstName</td>
-						<td>:</td>
-						<td><form:input path="stdName" placeholder="stdName" /></td>
+<tr>
+					<td>FirstName</td>
+					<td>:</td>
+					<td><form:input path="stdName" placeholder="Name" /></td>
 					</tr>
 					<tr>
 						<td>Address</td>
 						<td>:</td>
-						<td><form:input path="stdAddr" placeholder="stdAddr" />
+						<td><form:input path="stdAddr" placeholder="Addr" /></td></tr>
 					<tr>
 						<td>Cell</td>
 						<td>:</td>
-						<td><form:input path="stdPhone" placeholder="stdPhone" /></td>
+						<td><form:input path="stdPhone" placeholder="Phone" /></td>
 					</tr>
 					<tr>
 						<td>Gender</td>
 						<td>:</td>
 						<td><form:radiobutton path="stdGender" value="M" />Male <form:radiobutton
 								path="stdGender" value="F" />Female</td>
-								</tr>
-								<tr><td>Date</td>
-								<td>:</td>
-								<td><form:input type="datetime-local" path="stdDate" /></td></br>
-					<br><td><input type="submit" value="Submit" /><br></td>
-					<td><input type="reset" id="reset" value="Cancel" /></td>
+					</tr>
+					<tr>
+						<td>Country</td>
+						<td>:</td>
+						<td><form:select path="stdCountry">
+								<form:option value="" label="--- Select ---" />
+								<form:option value="India" label="India" />
+								<form:option value="Japan" label="Japan	" />
+								<form:option value="America	" label="America	" />
+								<form:option value="Singapore" label="Singapore" />
+								<form:options items="${countryList}" />
+						</form:select></td>
+					</tr>
+					<tr>
+						<td>Date</td>
+						<td>:</td>
+						<td><form:input type="datetime-local" path="stdDate" /></td></tr>
+					<tr>
+						<td>Select file</td>
+							<td>:</td>
+						<td><input type="file" name="fileUpload" id="fileUpload" fileUpload /></td>
+						
+				
+					</tr>
+					
+				<tr>
+					<td><input type="submit" value="Submit" />
+					<input type="reset" id="reset" value="Cancel" /></td>
 
 
 					</tr>
@@ -70,14 +92,16 @@
 
 		<div>
 			<h2>Student List</h2>
-			<table border="2">
-				<thead>
-					<th>Std_Id</th>
-					<th>Std_Name</th>
-					<th>Std_Addr</th>
-					<th>Std_Phone</th>
-					<th>StdGender</th>
-					<th>stdDate</th>
+			<table border="1">
+				<thead align="justify">
+					<th>StudentId</th>
+					<th>StudentName</th>
+					<th>StudentAddr</th>
+					<th>StudentPhone</th>
+					<th>StudentGender</th>
+					<th>StudentCountry</th>
+					<th>StudentDate</th>
+					<th>fileUpload</th>
 					<th>Action</th>
 				</thead>
 
@@ -89,8 +113,15 @@
 							<td>${student1.stdAddr}</td>
 							<td>${student1.stdPhone}</td>
 							<td>${student1.stdGender}</td>
-							<td>${student1.stdDate}</td> 
-
+							<td>${student1.stdCountry }</td>
+							<td>${student1.stdDate}</td>
+							<td><c:if test="${not empty student1.fileUpload}">
+			    <c:forTokens items="${student1.fileUpload}" delims="*" var="mySplit">
+			<a class="attachments" target="_blank" href="reportDocuments/${mySplit}">
+			<i class="fa fa-download fa-md grey" title="${mySplit}"></i></a>
+		    </c:forTokens>
+		   </c:if></td>
+							
 							<td><a href="editStudent?stdId=${student1.stdId}">Edit</a> <a
 								href="deleteStudent?stdId=${student1.stdId}">Delete</a></td>
 
